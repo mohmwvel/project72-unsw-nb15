@@ -76,18 +76,13 @@ If something fails (network block, missing permissions), put **UNSW_NB15_trainin
 
 ## Put this on your GitHub
 
-This repo ignores large **CSV** files and the **`results/`** folder so pushes stay small; anyone who clones can run `python main.py` to download data and regenerate outputs.
+Large **CSV** files and **`results/`** stay out of git (see `.gitignore`); clones can run `python main.py` to pull data and rebuild outputs.
 
-1. On GitHub, create a **new empty repository** (no README) under your account, e.g. [github.com/new](https://github.com/new).
-2. In the project folder (where `main.py` lives), run (replace `YOUR-REPO` with the repo name you chose):
+**Easiest path:** install [GitHub CLI](https://cli.github.com/) (`winget install GitHub.cli`), open PowerShell in this folder, run `gh auth login` once, then:
 
-```bash
-git remote add origin https://github.com/mohmwvel/YOUR-REPO.git
-git push -u origin main
+```powershell
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force
+.\push-github.ps1
 ```
 
-If you use the [GitHub CLI](https://cli.github.com/), log in once with `gh auth login`, then from the same folder you can create and push in one step:
-
-```bash
-gh repo create mohmwvel/YOUR-REPO --public --source=. --remote=origin --push
-```
+That creates **[github.com/mohmwvel/project72-unsw-nb15](https://github.com/mohmwvel/project72-unsw-nb15)** (if it does not exist yet) and pushes `main`. If you prefer a token instead of the browser flow, set `$env:GH_TOKEN` and run the same script (see comments inside `push-github.ps1`).
