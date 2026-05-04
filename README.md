@@ -37,7 +37,7 @@ If you are curious about scale: on the usual split there are on the order of **8
 From the folder that contains `main.py`:
 
 ```bash
-pip install -r requirements.txt
+python -m pip install -r requirements.txt
 python main.py
 ```
 
@@ -74,15 +74,15 @@ If something fails (network block, missing permissions), put **UNSW_NB15_trainin
 
 ---
 
-## Put this on your GitHub
+## GitHub
 
-Large **CSV** files and **`results/`** stay out of git (see `.gitignore`); clones can run `python main.py` to pull data and rebuild outputs.
+This project is published at **https://github.com/mohmwvel/project72-unsw-nb15**.
 
-**Easiest path:** install [GitHub CLI](https://cli.github.com/) (`winget install GitHub.cli`), open PowerShell in this folder, run `gh auth login` once, then:
+Large **CSV** files and **`results/`** stay out of git (see `.gitignore`); clone the repo, then run:
 
-```powershell
-Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force
-.\push-github.ps1
+```bash
+python -m pip install -r requirements.txt
+python main.py
 ```
 
-That creates **[github.com/mohmwvel/project72-unsw-nb15](https://github.com/mohmwvel/project72-unsw-nb15)** (if it does not exist yet) and pushes `main`. If you prefer a token instead of the browser flow, set `$env:GH_TOKEN` and run the same script (see comments inside `push-github.ps1`).
+If you need to rebuild from scratch, delete `data/UNSW_NB15_training-set.csv` and `data/UNSW_NB15_testing-set.csv` before running again.
