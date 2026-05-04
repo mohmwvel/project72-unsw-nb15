@@ -71,3 +71,23 @@ Python 3.x, **pandas**, **scikit-learn** (Random Forest), **matplotlib** (plots)
 ---
 
 If something fails (network block, missing permissions), put **UNSW_NB15_training-set.csv** and **UNSW_NB15_testing-set.csv** manually into the **`data/`** folder next to `main.py` and run again. That path is the most reliable offline option.
+
+---
+
+## Put this on your GitHub
+
+This repo ignores large **CSV** files and the **`results/`** folder so pushes stay small; anyone who clones can run `python main.py` to download data and regenerate outputs.
+
+1. On GitHub, create a **new empty repository** (no README) under your account, e.g. [github.com/new](https://github.com/new).
+2. In the project folder (where `main.py` lives), run (replace `YOUR-REPO` with the repo name you chose):
+
+```bash
+git remote add origin https://github.com/mohmwvel/YOUR-REPO.git
+git push -u origin main
+```
+
+If you use the [GitHub CLI](https://cli.github.com/), log in once with `gh auth login`, then from the same folder you can create and push in one step:
+
+```bash
+gh repo create mohmwvel/YOUR-REPO --public --source=. --remote=origin --push
+```
