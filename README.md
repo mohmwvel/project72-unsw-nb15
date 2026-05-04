@@ -22,7 +22,7 @@ If you are curious about scale: on the usual split there are on the order of **8
 
 ## How it works (in plain language)
 
-1. **Data** — The script looks for two CSV files in `data/`. If they are not there, it **downloads a ready-made zip from GitHub** (same filenames as the common Kaggle layout) and unpacks them. You can also drop the files in yourself if you prefer (for example from [Kaggle](https://www.kaggle.com/datasets/mrwellsdavid/unsw-nb15)).
+1. **Data** — The script looks for two CSV files in `data/`. If they are not there, it **downloads a ready-made zip from a public mirror** and unpacks them. You can also drop the files in yourself if you prefer (for example from [Kaggle](https://www.kaggle.com/datasets/mrwellsdavid/unsw-nb15)).
 
 2. **Preprocessing** — It drops columns that are not inputs (`id`, and `attack_cat` when present), turns categories like `proto`, `service`, and `state` into numeric columns, and lines up train and test so column names match.
 
@@ -74,15 +74,3 @@ If something fails (network block, missing permissions), put **UNSW_NB15_trainin
 
 ---
 
-## GitHub
-
-This project is published at **https://github.com/mohmwvel/project72-unsw-nb15**.
-
-Large **CSV** files and **`results/`** stay out of git (see `.gitignore`); clone the repo, then run:
-
-```bash
-python -m pip install -r requirements.txt
-python main.py
-```
-
-If you need to rebuild from scratch, delete `data/UNSW_NB15_training-set.csv` and `data/UNSW_NB15_testing-set.csv` before running again.

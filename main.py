@@ -1,3 +1,19 @@
+import os
+import sys
+import pickle
+import zipfile
+import urllib.request
+import warnings
+
+import matplotlib
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt
+import pandas as pd
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import classification_report, confusion_matrix, roc_auc_score
+
+warnings.filterwarnings("ignore")
+
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 TRAIN_CSV = os.path.join("data", "UNSW_NB15_training-set.csv")
 TEST_CSV = os.path.join("data", "UNSW_NB15_testing-set.csv")
@@ -14,7 +30,7 @@ def ensure_dataset():
     if os.path.isfile(TRAIN_CSV) and os.path.isfile(TEST_CSV):
         return
 
-    print("Downloading UNSW-NB15 (GitHub mirror)...")
+    print("Downloading UNSW-NB15 from a public mirror...")
     tmp = os.path.join("data", "_nb15.zip")
     try:
         urllib.request.urlretrieve(ZIP_URL, tmp)
