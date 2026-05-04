@@ -10,8 +10,12 @@ $OwnerRepo = "mohmwvel/project72-unsw-nb15"
 $RemoteUrl = "https://github.com/$OwnerRepo.git"
 
 function Test-GhAuth {
-    gh auth status 2>&1 | Out-Null
-    return ($LASTEXITCODE -eq 0)
+    $prev = $ErrorActionPreference
+    $ErrorActionPreference = "SilentlyContinue"
+    $null = gh auth status 2>&1
+    $ok = ($LASTEXITCODE -eq 0)
+    $ErrorActionPreference = $prev
+    return $ok
 }
 
 if (-not (Test-GhAuth)) {
@@ -39,9 +43,10 @@ if (-not (Test-GhAuth)) {
 }
 
 # Repo already on GitHub?
-$exists = $false
-gh repo view $OwnerRepo 2>&1 | Out-Null
-if ($LASTEXITCODE -eq 0) { $exists = $true }
+$ErrorActionPreference = "SilentlyContinue"
+$null = gh repo view $OwnerRepo 2>&1
+$exists = ($LASTEXITCODE -eq 0)
+$ErrorActionPreference = "Stop"
 
 if ($exists) {
     Write-Host "Remote repo exists. Configuring origin and pushing..."
@@ -54,11 +59,11 @@ else {
     git remote remove origin 2>$null
     gh repo create $OwnerRepo `
         --public `
-        --description "UNSW-NB15 intrusion detection — Random Forest (Project 72)" `
+        --description "UNSW-NB15 intrusion detection - Random Forest (Project 72)" `
         --source=. `
         --remote=origin `
         --push
 }
 
 Write-Host ""
-Write-Host "Done. Repo: https://github.com/$OwnerRepo" -ForegroundColor Green
+Write-Host ("Done. Repo: https://github.com/" + $OwnerRepo) -ForegroundColor Green
