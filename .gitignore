@@ -1,0 +1,17 @@
+# Large / generated — script can recreate these
+data/*.csv
+results/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
